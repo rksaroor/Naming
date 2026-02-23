@@ -816,6 +816,220 @@ footer p {
 
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   STAR SECTION — baby reveal
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.star-section {
+  position: relative;
+  overflow: hidden;
+  padding: 120px 32px 140px;
+  background:
+    radial-gradient(ellipse 70% 80% at 50% 60%, rgba(255,107,0,0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 15% 30%, rgba(233,30,140,0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 85% 30%, rgba(106,27,154,0.14) 0%, transparent 55%),
+    linear-gradient(170deg, #1a0533 0%, #0d0120 50%, #2d0900 100%);
+  text-align: center;
+}
+
+/* Floating petals — pure CSS */
+.petals { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+.petal {
+  position: absolute;
+  font-size: 22px;
+  opacity: 0;
+  animation: petalFall linear infinite;
+}
+.petal:nth-child(1)  { left:5%;   font-size:18px; animation-duration:7s;  animation-delay:0s;   }
+.petal:nth-child(2)  { left:15%;  font-size:24px; animation-duration:9s;  animation-delay:1.2s; }
+.petal:nth-child(3)  { left:25%;  font-size:16px; animation-duration:6s;  animation-delay:2.5s; }
+.petal:nth-child(4)  { left:35%;  font-size:20px; animation-duration:8s;  animation-delay:0.8s; }
+.petal:nth-child(5)  { left:50%;  font-size:26px; animation-duration:10s; animation-delay:3s;   }
+.petal:nth-child(6)  { left:62%;  font-size:18px; animation-duration:7s;  animation-delay:1.8s; }
+.petal:nth-child(7)  { left:72%;  font-size:22px; animation-duration:8s;  animation-delay:0.4s; }
+.petal:nth-child(8)  { left:82%;  font-size:16px; animation-duration:6s;  animation-delay:2.1s; }
+.petal:nth-child(9)  { left:91%;  font-size:20px; animation-duration:9s;  animation-delay:1.5s; }
+.petal:nth-child(10) { left:45%;  font-size:14px; animation-duration:5s;  animation-delay:3.8s; }
+@keyframes petalFall {
+  0%   { opacity:0;   transform: translateY(-60px) rotate(0deg) scale(0.8); }
+  10%  { opacity:0.7; }
+  80%  { opacity:0.5; }
+  100% { opacity:0;   transform: translateY(110vh) rotate(360deg) scale(1.1); }
+}
+
+/* Spotlight glow behind photo */
+.star-spotlight {
+  position: absolute;
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(255,186,8,0.22) 0%,
+    rgba(233,30,140,0.10) 40%,
+    transparent 70%);
+  left: 50%; top: 50%;
+  transform: translate(-50%, -42%);
+  pointer-events: none;
+  animation: spotPulse 5s ease-in-out infinite;
+}
+@keyframes spotPulse {
+  0%,100% { transform: translate(-50%,-42%) scale(1);   opacity:1; }
+  50%      { transform: translate(-50%,-42%) scale(1.15); opacity:0.75; }
+}
+
+/* The frame */
+.star-frame-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 48px;
+  z-index: 2;
+}
+
+/* Outer decorative ring */
+.star-frame-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -16px;
+  border-radius: 50% 46% 50% 46% / 46% 50% 46% 50%;
+  border: 1.5px solid rgba(255,186,8,0.4);
+  animation: frameRotate 12s linear infinite;
+}
+.star-frame-wrap::after {
+  content: '';
+  position: absolute;
+  inset: -28px;
+  border-radius: 50% 46% 50% 46% / 46% 50% 46% 50%;
+  border: 1px dashed rgba(233,30,140,0.25);
+  animation: frameRotate 20s linear infinite reverse;
+}
+@keyframes frameRotate { to { transform: rotate(360deg); } }
+
+/* The actual photo */
+.star-photo {
+  width: clamp(240px, 55vw, 380px);
+  height: clamp(240px, 55vw, 380px);
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50% 46% 50% 46% / 46% 50% 46% 50%;
+  border: 4px solid rgba(255,186,8,0.6);
+  box-shadow:
+    0 0 0 8px rgba(255,107,0,0.12),
+    0 0 0 16px rgba(233,30,140,0.08),
+    0 20px 80px rgba(255,107,0,0.45),
+    inset 0 0 40px rgba(255,186,8,0.1);
+  display: block;
+  filter: saturate(1.15) contrast(1.05);
+  animation: photoFloat 6s ease-in-out infinite;
+}
+@keyframes photoFloat {
+  0%,100% { transform: translateY(0px); }
+  50%      { transform: translateY(-12px); }
+}
+
+/* Corner jewels */
+.star-jewel {
+  position: absolute;
+  font-size: 20px;
+  animation: jewelSpin 8s linear infinite;
+  z-index: 3;
+}
+.star-jewel:nth-child(2) { top: -8px;  left: 50%; transform: translateX(-50%); }
+.star-jewel:nth-child(3) { bottom: -8px; left: 50%; transform: translateX(-50%); animation-direction: reverse; }
+.star-jewel:nth-child(4) { left: -8px;  top: 50%;  transform: translateY(-50%); animation-duration: 6s; }
+.star-jewel:nth-child(5) { right: -8px; top: 50%;  transform: translateY(-50%); animation-duration: 10s; }
+@keyframes jewelSpin {
+  0%,100% { transform: translateX(-50%) scale(1);   }
+  50%      { transform: translateX(-50%) scale(1.4); }
+}
+
+/* Headline */
+.star-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--saffron), var(--rose2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.star-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(56px, 14vw, 110px);
+  display: block;
+  background: linear-gradient(135deg,
+    var(--marigold) 0%, var(--saffron2) 30%,
+    var(--cream) 55%, var(--saffron2) 80%, var(--marigold) 100%);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s ease-in-out infinite;
+  line-height: 1;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 24px rgba(255,150,0,0.5));
+  position: relative;
+  z-index: 2;
+}
+
+.star-tagline {
+  font-family: 'Cormorant', serif;
+  font-style: italic;
+  font-size: clamp(18px, 4vw, 28px);
+  color: rgba(255,248,225,0.65);
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 2;
+  display: block;
+  margin-bottom: 32px;
+}
+.star-tagline strong {
+  font-style: normal;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--rose2), var(--violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Pill badges row */
+.star-badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+.star-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 40px;
+  border: 1px solid;
+}
+.star-badge.b1 {
+  color: var(--saffron2);
+  border-color: rgba(255,150,0,0.4);
+  background: rgba(255,107,0,0.1);
+}
+.star-badge.b2 {
+  color: var(--rose2);
+  border-color: rgba(233,30,140,0.4);
+  background: rgba(233,30,140,0.1);
+}
+.star-badge.b3 {
+  color: var(--violet);
+  border-color: rgba(171,71,188,0.4);
+  background: rgba(106,27,154,0.1);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    REDUCED MOTION — instant visibility
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 @media (prefers-reduced-motion: reduce) {
@@ -830,6 +1044,9 @@ footer p {
     transform: none !important;
     transition: none !important;
   }
+  .petal, .star-frame-wrap::before, .star-frame-wrap::after,
+  .star-photo, .star-spotlight, .star-jewel { animation: none !important; }
+  .star-photo { transform: none !important; }
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -968,6 +1185,51 @@ footer p {
 </section>
 
 
+<!-- ━━━━ STAR OF THE EVENING ━━━━ -->
+<div class="silk"></div>
+<section class="star-section section">
+
+  <!-- Floating petals -->
+  <div class="petals" aria-hidden="true">
+    <span class="petal">🌸</span>
+    <span class="petal">🌺</span>
+    <span class="petal">✨</span>
+    <span class="petal">🌼</span>
+    <span class="petal">🌸</span>
+    <span class="petal">⭐</span>
+    <span class="petal">🌺</span>
+    <span class="petal">✨</span>
+    <span class="petal">🌸</span>
+    <span class="petal">🌼</span>
+  </div>
+
+  <!-- Spotlight glow -->
+  <div class="star-spotlight" aria-hidden="true"></div>
+
+  <div class="reveal">
+    <span class="star-eyebrow">The Guest of Honour</span>
+
+    <!-- Framed photo -->
+    <div class="star-frame-wrap">
+      <span class="star-jewel" aria-hidden="true">🌟</span>
+      <span class="star-jewel" aria-hidden="true">💫</span>
+      <span class="star-jewel" aria-hidden="true">🌟</span>
+      <span class="star-jewel" aria-hidden="true">💫</span>
+      <img src="baby.png" alt="Aptha Suranshi" class="star-photo">
+    </div>
+
+    <span class="star-name">Aptha Suranshi</span>
+    <span class="star-tagline">The little <strong>boss</strong> has arrived —<br>and he's already running the show 👑</span>
+
+    <div class="star-badges">
+      <span class="star-badge b1">Born to Shine</span>
+      <span class="star-badge b2">March 8 · 2026</span>
+      <span class="star-badge b3">Son of Sushma &amp; Rakesh</span>
+    </div>
+  </div>
+</section>
+
+
 <!-- ━━━━ QUOTE ━━━━ -->
 <div class="silk"></div>
 <section class="quote-section section">
@@ -1014,7 +1276,7 @@ footer p {
 
 <footer>
   <img src="suranshi_logo.png" alt="Suranshi" class="footer-seal">
-  <p>Namkaran Ceremony &nbsp;·&nbsp; March 8, 2026 &nbsp;·&nbsp; Bengaluru, Karnataka</p>
+  <p>Aptha Suranshi &nbsp;·&nbsp; Namkaran Ceremony &nbsp;·&nbsp; March 8, 2026 &nbsp;·&nbsp; Bengaluru, Karnataka</p>
 </footer>
 
 
